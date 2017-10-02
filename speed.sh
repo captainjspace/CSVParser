@@ -5,6 +5,8 @@ exec > >(tee -a speed-${DATE}.log)
 exec 2>&1
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home
 export CLASSPATH=$CLASSPATH:./bin:.
+export GOROOT=/usr/local/opt/go/libexec
+export GOPATH=/Users/joshualandman/golang
 echo "JSON VALIDITY TEST"
 CSVParser.py | python -m json.tool
 CSVParser.pl | python -m json.tool
@@ -40,8 +42,8 @@ awk '{if (NR==1) {printf("{");};if ( (NR)%4==1 ) {
   echo "$SPEEDJSON" > speed.json
   python -m SimpleHTTPServer &
   PID=$!
-  echo "\nPython PID: $PID\n"
+  echo "Python PID: $PID"
   open "http://localhost:8000"
-  echo "\nsee results.js, HIT ENTER to kill the server\n"
+  echo "see results.js, HIT ENTER to kill the server"
   read
   kill -9 $PID

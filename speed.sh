@@ -34,9 +34,14 @@ awk '{if (NR==1) {printf("{");};if ( (NR)%4==1 ) {
           printf("\"%s\":\"%s\",", $1,$2);
           next;
         }
-        printf("gjkgjfdjkgfdl\n");
       }
   }' | sed -e 's/,$/},/'| sed '$ s/.$//'; echo "}");
   echo $SPEEDJSON
   echo "$SPEEDJSON" > speed.json
-  open "http://localhost:8000" && python -m SimpleHTTPServer
+  python -m SimpleHTTPServer &
+  PID=$!
+  echo "\nPython PID: $PID\n"
+  open "http://localhost:8000"
+  echo "\nsee results.js, HIT ENTER to kill the server\n"
+  read
+  kill -9 $PID

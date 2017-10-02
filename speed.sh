@@ -3,6 +3,7 @@ DATE=$(date  +'%Y%m%d%H%M%S');
 echo $DATE
 exec > >(tee -a speed-${DATE}.log)
 exec 2>&1
+# SET YOUR OWN
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home
 export CLASSPATH=$CLASSPATH:./bin:.
 export GOROOT=/usr/local/opt/go/libexec
